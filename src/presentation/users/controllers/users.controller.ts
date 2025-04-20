@@ -1,16 +1,17 @@
 import { UserEntity } from '@domain/users/entities/user.enity';
-import { CreateUserUseCase } from '@domain/users/use-cases/create-user/create-user.use-case';
 import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
+import { UserApplicationFactory } from 'src/application/users/users.application';
 
 @Controller('users')
 export class UsersController {
   constructor(
-    @Inject(CreateUserUseCase) private readonly userUsecase: CreateUserUseCase,
+    @Inject(UserApplicationFactory)
+    private readonly userApplicationFactory: UserApplicationFactory,
   ) {}
 
   @Post('')
   async create(@Body() input: Partial<UserEntity>): Promise<void> {
-    await this.userUsecase.execute(input);
+    await this.userApplicationFactory.createUser(input);
   }
 
   @Get('')

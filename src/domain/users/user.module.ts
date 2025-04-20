@@ -5,6 +5,6 @@ import { RepositoryModule } from '@infra/repositories/repositories.module';
 @Module({
   imports: [RepositoryModule],
   providers: [CreateUserUseCase],
-  exports: [CreateUserUseCase],
+  exports: [CreateUserUseCase, RepositoryModule],
 })
-export class UserModule {}
+export class UserDomainModule {}

@@ -14,4 +14,16 @@ export class UserRepository
     return await this.userRepository.save(input);
   }
   findById: (id: string) => Promise<UserEntity>;
+
+  async findByEmail(email: string): Promise<UserEntity> {
+    return await this.userRepository.findOne({
+      where: { email },
+    });
+  }
+
+  async findByEin(ein: string): Promise<UserEntity> {
+    return await this.userRepository.findOne({
+      where: { ein },
+    });
+  }
 }
