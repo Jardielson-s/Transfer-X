@@ -3,6 +3,6 @@ import { UsersControllerModule } from './users/users-controller.module';
 
 @Module({
   imports: [UsersControllerModule],
-  exports: [UsersControllerModule],
+  exports: [],
 })
 export class PresentationModule {}

@@ -1,12 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { UserEntity } from '@domain/users/entities/user.enity';
 import { IUseCase } from '@domain/interfaces/use-case';
+import { UserRepository } from '@infra/repositories/users/users.repository';
 
 @Injectable()
 export class CreateUserUseCase
   implements IUseCase<Partial<UserEntity>, UserEntity>
 {
+  constructor(
+    @Inject(UserRepository) private readonly userRepositiry: UserRepository,
+  ) {}
   async execute(userEntityInput: Partial<UserEntity>): Promise<UserEntity> {
-    return new UserEntity(userEntityInput);
+    const userEntity = new UserEntity(userEntityInput);
+    return await this.userRepositiry.create(userEntity);
   }
 }

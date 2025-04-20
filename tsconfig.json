@@ -19,7 +19,8 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "@domain/*": ["./src/domain/*"],
-      "@presentation/*": ["./src/presentation/*"]
+      "@presentation/*": ["./src/presentation/*"],
+      "@infra/*": ["./src/infra/*"]
     }
   }
 }
