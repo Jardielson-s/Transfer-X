@@ -8,6 +8,14 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
       POSTGRES_DB: transfer
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
     ports:
       - 5433:5432
     networks:
@@ -27,6 +35,16 @@ services:
       - POSTGRES_USERNAME=${POSTGRES_USERNAME}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 500M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    entrypoint: |
+      bash -c "npm run migration:run && npm run start:prod"
     ports:
       - '3000:3000'
     depends_on:
