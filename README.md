@@ -6,6 +6,11 @@
 Transfer-X is an application that provides credit for all users, allowing them to transfer funds or purchase something.
 </p>
 
+## Tools
+- [x] nodejs 22 or 23
+- [ ] asaas gateway
+- [ ] terraform/aws rds and aws ec2
+
 ## Entities
 
 - [x] users
