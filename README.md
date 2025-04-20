@@ -8,6 +8,6 @@ Transfer-X is an application that provides credit for all users, allowing them t
 
 ## Entities
 
-- [ x ] users
+- [x] users
 - [ ] transactions
-- [] wallets
+- [ ] wallets
