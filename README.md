@@ -8,14 +8,14 @@ Transfer-X is an application that provides credit for all users, allowing them t
 
 ## Tools
 - [x] nodejs 22 or 23
-- [ ] asaas gateway
+- [x] asaas gateway
 - [ ] terraform/aws rds and aws ec2
 
 ## Entities
 
 - [x] users
 - [ ] transactions
-- [ ] wallets
+- [x] wallets
 
 ## Execute Terraform
 ```
