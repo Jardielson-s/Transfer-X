@@ -16,7 +16,6 @@ export class WalletRepository
   }
 
   async findById(id: string): Promise<WalletEntity> {
-    console.log(id, 'aqui');
     return await this.walletRepository.findOne({
       where: {
         id,

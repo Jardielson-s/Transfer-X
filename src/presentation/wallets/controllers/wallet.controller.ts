@@ -29,7 +29,6 @@ export class WalletsController {
 
   @Get(':id')
   async details(@Param('id') id: string): Promise<WalletEntity> {
-    console.log(id);
     return await this.walletApplicationFactory.findById(id);
   }
 }
