@@ -1,4 +1,4 @@
-import { UserEntity } from '@domain/users/entities/user.enity';
+import { UserEntity } from '@domain/users/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IRepository } from 'src/shared/repository.interface';
 import { Repository } from 'typeorm';

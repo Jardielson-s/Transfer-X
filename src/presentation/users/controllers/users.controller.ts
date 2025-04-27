@@ -1,4 +1,4 @@
-import { UserEntity } from '@domain/users/entities/user.enity';
+import { UserEntity } from '@domain/users/entities/user.entity';
 import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
 import { UserApplicationFactory } from 'src/application/users/users.application';
 

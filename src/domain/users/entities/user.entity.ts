@@ -1,26 +1,29 @@
 import { IEntity } from '@domain/interfaces/entity';
+import { WalletEntity } from '@domain/wallets/entities/wallet.entity';
 import {
+  Column,
   CreateDateColumn,
   Entity,
-  PrimaryColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('users')
 export class UserEntity implements IEntity {
-  @PrimaryColumn({ type: 'uuid' })
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @PrimaryColumn({ type: 'varchar' })
+  @Column({ type: 'varchar' })
   name: string;
 
-  @PrimaryColumn({ type: 'varchar', unique: true })
+  @Column({ type: 'varchar', unique: true })
   ein: string;
 
-  @PrimaryColumn({ type: 'varchar', unique: true })
+  @Column({ type: 'varchar', unique: true })
   email: string;
 
-  @PrimaryColumn({ type: 'varchar' })
+  @Column({ type: 'varchar' })
   password: string;
 
   @CreateDateColumn()
@@ -28,6 +31,9 @@ export class UserEntity implements IEntity {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => WalletEntity, (wallet) => wallet.user)
+  wallets: WalletEntity[];
 
   constructor(input: Partial<UserEntity>) {
     Object.assign(this, input);

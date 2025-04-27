@@ -14,11 +14,12 @@ export const config: TypeOrmModuleOptions = {
   password: ConfigEnvs.postgres.password,
   database: ConfigEnvs.postgres.database,
   entities: [join(__dirname, '/../**/**.entity{.ts,.js}')],
-  migrations: ['src/database/migrations/**/*.{ts, js}'],
+  migrations: ['src/database/migrations/**/*.{js}'],
   autoLoadEntities: true,
   synchronize: false,
   migrationsRun: false,
   namingStrategy: new SnakeNamingStrategy(),
+  logging: true,
 };
 
 export default registerAs('typeorm', () => config);

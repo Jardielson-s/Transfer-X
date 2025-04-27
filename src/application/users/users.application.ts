@@ -1,6 +1,6 @@
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { CreateUserUseCase } from '@domain/users/use-cases/create-user/create-user.use-case';
-import { UserEntity } from '@domain/users/entities/user.enity';
+import { UserEntity } from '@domain/users/entities/user.entity';
 import { UserRepository } from '@infra/repositories/users/users.repository';
 
 @Injectable()
