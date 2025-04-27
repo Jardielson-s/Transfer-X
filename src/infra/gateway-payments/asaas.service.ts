@@ -1,30 +1,34 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import axios from 'axios';
-import { ICustomer } from 'src/shared/inputs/customer.interfcae';
 import { pixAddressKeyType, Transfer } from './interfaces/transfer.interface';
+import { ICustomer } from 'shared/inputs/customer.interface';
+import { ConfigEnvs } from 'config/env';
 
 @Injectable()
 export class AsaasService {
   private baseUrl;
   constructor() {
     this.baseUrl = new axios.Axios({
-      baseURL: process.env.ASAAS_SEGURADORA_API_URL,
+      baseURL: ConfigEnvs.asaas.API_URL,
       headers: {
         'Content-Type': 'application/json',
-        access_token: process.env.ASAAS_SEGURADORA_API_TOKEN,
+        access_token: ConfigEnvs.asaas.API_TOKEN,
       },
     });
   }
 
-  async createCustomer(input: ICustomer): Promise<string> {
+  async createCustomer(input: Partial<ICustomer>): Promise<string> {
     try {
       const customer = await this.baseUrl.post(
         '/customers',
         JSON.stringify(input),
       );
-      return customer?.data?.id;
+      if (customer.status === 400) {
+        JSON.parse(customer.data)?.errors[0]?.description;
+      }
+      return JSON.parse(customer?.data)?.id;
     } catch (err) {
-      throw new BadRequestException('error to create customer');
+      throw new BadRequestException(err.message);
     }
   }
   async tranferPix(input: {
@@ -40,13 +44,28 @@ export class AsaasService {
         JSON.stringify(input),
       );
       if (response.status === 400) {
-        throw new BadRequestException(response.data.description);
+        JSON.parse(response.data)?.errors[0]?.description;
       }
       return response.data;
     } catch (error) {
-      if (error.message.includes('A chave informada não foi encontrada.')) {
+      throw new BadRequestException(error.message);
+    }
+  }
+
+  async createPix(type: pixAddressKeyType): Promise<string> {
+    try {
+      const response = await this.baseUrl.post(
+        '/pix/addressKeys',
+        JSON.stringify({ type }),
+      );
+      if (response.status === 400) {
+        throw new BadRequestException(
+          JSON.parse(response.data)?.errors[0]?.description,
+        );
       }
-      throw new BadRequestException('error to transfer');
+      return JSON.parse(response.data)?.key;
+    } catch (error) {
+      throw new BadRequestException(error.message);
     }
   }
 }

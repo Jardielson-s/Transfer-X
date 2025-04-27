@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IUseCase } from '@domain/interfaces/use-case';
-import { WalletRepository } from '@infra/repositories/wallets/wallet.repository';
-import { WalletEntity } from '@domain/wallets/entities/wallet.entity';
+import { IUseCase } from 'domain/interfaces/use-case';
+import { WalletEntity } from 'domain/wallets/entities/wallet.entity';
+import { WalletRepository } from 'infra/repositories/wallets/wallet.repository';
 
 @Injectable()
 export class FindWalletByIdUseCase implements IUseCase<string, WalletEntity> {

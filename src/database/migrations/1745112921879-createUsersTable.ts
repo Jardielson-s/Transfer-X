@@ -37,6 +37,44 @@ export class CreateUsersTable1745112921879 implements MigrationInterface {
             isUnique: true,
           },
           {
+            name: 'phone',
+            type: 'varchar',
+          },
+          {
+            name: 'postal_code',
+            length: '50',
+            type: 'varchar',
+          },
+          {
+            name: 'address',
+            length: '100',
+            type: 'varchar',
+          },
+          {
+            name: 'address_number',
+            length: '10',
+            type: 'varchar',
+          },
+          {
+            name: 'complement',
+            type: 'varchar',
+            length: '100',
+            isNullable: true,
+          },
+          {
+            name: 'city',
+            type: 'varchar',
+          },
+          {
+            name: 'country',
+            type: 'varchar',
+          },
+          {
+            name: 'external_user_id',
+            type: 'varchar',
+            length: '20',
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'CURRENT_TIMESTAMP',

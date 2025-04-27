@@ -14,7 +14,7 @@ export const config: TypeOrmModuleOptions = {
   password: ConfigEnvs.postgres.password,
   database: ConfigEnvs.postgres.database,
   entities: [join(__dirname, '/../**/**.entity{.ts,.js}')],
-  migrations: ['src/database/migrations/**/*.{js}'],
+  migrations: ['dist/database/migrations/*.js'],
   autoLoadEntities: true,
   synchronize: false,
   migrationsRun: false,

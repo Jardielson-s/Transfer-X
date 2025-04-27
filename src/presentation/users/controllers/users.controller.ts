@@ -1,7 +1,10 @@
-import { UserEntity } from '@domain/users/entities/user.entity';
-import { Body, Controller, Get, Inject, Post } from '@nestjs/common';
-import { UserApplicationFactory } from 'src/application/users/users.application';
+import { Body, Controller, Get, Inject, Post, Response } from '@nestjs/common';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Response as Res } from 'express';
+import { UserApplicationFactory } from 'application/users/users.application';
+import { CreateUserDto } from '../dtos/create-user.dto';
 
+@ApiTags('users')
 @Controller('users')
 export class UsersController {
   constructor(
@@ -10,8 +13,16 @@ export class UsersController {
   ) {}
 
   @Post('')
-  async create(@Body() input: Partial<UserEntity>): Promise<void> {
-    await this.userApplicationFactory.createUser(input);
+  @ApiResponse({
+    status: 201,
+    description: 'returns only request status',
+  })
+  async create(
+    @Response() res: Res,
+    @Body() input: CreateUserDto,
+  ): Promise<Res> {
+    const data = await this.userApplicationFactory.createUser(input);
+    return res.status(201).json(data);
   }
 
   @Get('')

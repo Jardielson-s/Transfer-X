@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import { CreateUserUseCase } from './use-cases/create-user/create-user.use-case';
-import { RepositoryModule } from '@infra/repositories/repositories.module';
+import { InfraModule } from 'infra/infra.module';
 
 @Module({
-  imports: [RepositoryModule],
+  imports: [InfraModule],
   providers: [CreateUserUseCase],
-  exports: [CreateUserUseCase, RepositoryModule],
+  exports: [CreateUserUseCase, InfraModule],
 })
 export class UserDomainModule {}

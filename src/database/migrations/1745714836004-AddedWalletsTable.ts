@@ -38,6 +38,7 @@ export class AddedWalletsTable1745714836004 implements MigrationInterface {
           {
             name: 'type',
             type: 'varchar',
+            isNullable: true,
           },
           {
             name: 'password',
@@ -57,6 +58,10 @@ export class AddedWalletsTable1745714836004 implements MigrationInterface {
             name: 'locked',
             type: 'boolean',
             default: false,
+          },
+          {
+            name: 'pix',
+            type: 'jsonb',
           },
           {
             name: 'created_at',

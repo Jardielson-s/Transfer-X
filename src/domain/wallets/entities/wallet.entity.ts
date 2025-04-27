@@ -1,5 +1,5 @@
-import { IEntity } from '@domain/interfaces/entity';
-import { UserEntity } from '@domain/users/entities/user.entity';
+import { IEntity } from 'domain/interfaces/entity';
+import { UserEntity } from 'domain/users/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
@@ -19,16 +19,16 @@ export class WalletEntity implements IEntity {
   name: string;
 
   @Column({ type: 'varchar' })
-  description: string;
+  description?: string;
 
   @Column({ type: 'varchar', unique: true })
   number: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', nullable: true })
   type: string;
 
   @Column({ type: 'varchar' })
-  password: string;
+  password?: string;
 
   @Column({ type: 'float', default: 0 })
   balance: number;
@@ -42,6 +42,9 @@ export class WalletEntity implements IEntity {
 
   @Column('uuid')
   userId: string;
+
+  @Column('jsonb', { array: true })
+  pix: Array<{ key: string; type: string }>;
 
   @CreateDateColumn()
   createdAt: Date;

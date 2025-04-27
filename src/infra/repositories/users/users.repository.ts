@@ -1,6 +1,6 @@
-import { UserEntity } from '@domain/users/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IRepository } from 'src/shared/repository.interface';
+import { UserEntity } from 'domain/users/entities/user.entity';
+import { IRepository } from 'shared/repository.interface';
 import { Repository } from 'typeorm';
 
 export class UserRepository
@@ -13,7 +13,11 @@ export class UserRepository
   async create(input: Partial<UserEntity>): Promise<UserEntity> {
     return await this.userRepository.save(input);
   }
-  findById: (id: string) => Promise<UserEntity>;
+  async findById(id: string): Promise<UserEntity> {
+    return await this.userRepository.findOne({
+      where: { id },
+    });
+  }
 
   async findByEmail(email: string): Promise<UserEntity> {
     return await this.userRepository.findOne({

@@ -1,6 +1,6 @@
-import { WalletEntity } from '@domain/wallets/entities/wallet.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { IRepository } from 'src/shared/repository.interface';
+import { WalletEntity } from 'domain/wallets/entities/wallet.entity';
+import { IRepository } from 'shared/repository.interface';
 import { Repository } from 'typeorm';
 
 export class WalletRepository
@@ -13,6 +13,16 @@ export class WalletRepository
 
   async create(input: Partial<WalletEntity>): Promise<WalletEntity> {
     return await this.walletRepository.save(input);
+  }
+
+  async update(
+    id: string,
+    input: Partial<WalletEntity>,
+  ): Promise<WalletEntity> {
+    return (await this.walletRepository.update(
+      id,
+      input,
+    )) as unknown as WalletEntity;
   }
 
   async findById(id: string): Promise<WalletEntity> {

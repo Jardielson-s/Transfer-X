@@ -1,5 +1,5 @@
-import { IEntity } from '@domain/interfaces/entity';
-import { WalletEntity } from '@domain/wallets/entities/wallet.entity';
+import { IEntity } from 'domain/interfaces/entity';
+import { WalletEntity } from 'domain/wallets/entities/wallet.entity';
 import {
   Column,
   CreateDateColumn,
@@ -25,6 +25,30 @@ export class UserEntity implements IEntity {
 
   @Column({ type: 'varchar' })
   password: string;
+
+  @Column({ type: 'varchar' })
+  phone: string;
+
+  @Column({ type: 'varchar' })
+  postalCode: string;
+
+  @Column({ type: 'varchar' })
+  address: string;
+
+  @Column({ name: 'address_number', type: 'varchar' })
+  addressNumber: string;
+
+  @Column({ type: 'varchar' })
+  complement?: string;
+
+  @Column({ type: 'varchar' })
+  city: string;
+
+  @Column({ type: 'varchar' })
+  country: string;
+
+  @Column({ type: 'varchar' })
+  externalUserId: string;
 
   @CreateDateColumn()
   createdAt: Date;
