@@ -118,7 +118,7 @@ export class UserApplicationFactory {
             upsert.push(input);
           }),
         );
-        console.log(errors);
+
         if (upsert.length) {
           await this.upsertUserUseCase.execute(upsert);
         }
