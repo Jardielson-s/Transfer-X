@@ -12,37 +12,60 @@ resource "aws_instance" "ubuntu_instance" {
 
   user_data = <<-EOF
               #!/bin/bash
+
+              sudo apt-get update -y
+              sudo apt-get upgrade -y
+              
+              # Instalar Node.js (versão 16 ou mais recente)
+              curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+              sudo apt-get install -y nodejs
+              
+              # Instalar o NestJS CLI globalmente
+              sudo npm install -g @nestjs/cli
+              
+              # Criar o diretório e a aplicação NestJS
+              cd /home/ubuntu
               sudo apt update -y
               sudo apt install -y nginx
 
-              # Create index.html with H1 tag in the default NGINX web directory
-              echo "<h1>Hello From Ubuntu EC2 Instance!!!</h1>" | sudo tee /var/www/html/index.html
-
-              # Update NGINX to listen on port 3000
-              sudo sed -i 's/listen 80 default_server;/listen 3000 default_server;/g' /etc/nginx/sites-available/default
-
-              # Restart NGINX to apply the changes
-              sudo systemctl restart nginx
-
               # NodeJs
               sudo wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.39.3/install.sh | bash
-              sudo ource ~/.profile
-              sudo nvm install 23
+              sudo source ~/.profile
+              sudo nvm install 22
 
-              # Docker
-              sudo sudo apt-get install docker.io
-
-              # Docker Compose
-              sudo curl -L "https://github.com/docker/compose/releases/download/1.26.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-              sudo chmod +x /usr/local/bin/docker-compose
-              sudo groupadd docker
-              sudo usermod -aG docker $USER
-              sudo reboot
               git clone https://github.com/Jardielson-s/Transfer-X.git
               cd Transfer-X
-              sudo npm i
+              sudo echo "POSTGRES_HOST=${var.postgres_host}" >> .env
+              sudo echo "POSTGRES_DATABASE=${var.postgres_database}" >> .env
+              sudo echo "POSTGRES_USERNAME=${var.postgres_username}" >> .env
+              sudo echo "POSTGRES_PORT=${var.postgres_port}" >> .env
+              sudo echo "POSTGRES_PASSWORD=${var.postgres_password}" >> .env
 
+              sudo echo "ASAAS_API_URL=${var.asaas_api_url}" >> .env
+              sudo echo "ASAAS_API_TOKEN=${var.asaas_api_token}" >> .env
+              sudo echo "ASAAS_API_WALLET_ID=${var.asaas_api_wallet_id}" >> .env
+              sudo npm install --force
+
+              # Configurar o Nginx como Proxy Reverso
+              sudo rm /etc/nginx/sites-enabled/default
+              sudo bash -c 'echo "server {
+                listen 80;
+                server_name _;
+
+                location / {
+                  proxy_pass http://localhost:3000;
+                  proxy_http_version 1.1;
+                  proxy_set_header Upgrade \$http_upgrade;
+                  proxy_set_header Connection 'upgrade';
+                  proxy_set_header Host \$host;
+                  proxy_cache_bypass \$http_upgrade;
+                }
+              }" > /etc/nginx/sites-available/default'
+              
+              sudo systemctl restart nginx
+              sudo systemctl enable nginx
               EOF
+
 
   tags = {
     Name = "ubuntu-instance"
@@ -80,12 +103,12 @@ resource "aws_security_group" "allow_access_types" {
     # ipv6_cidr_blocks = ["::/0"]
   }
 
-  ingress {
-    from_port   = 3000
-    to_port     = 3000
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  # ingress {
+  #   from_port   = 3000
+  #   to_port     = 3000
+  #   protocol    = "tcp"
+  #   cidr_blocks = ["0.0.0.0/0"]
+  # }
 
   egress {
     from_port   = 0

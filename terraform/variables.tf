@@ -45,3 +45,51 @@ variable "vpc_default_public_subnet_id" {
   description = "subnet public id from vpc default"
   nullable    = false
 }
+
+variable "postgres_host" {
+  type        = string
+  description = "posgres host"
+  nullable    = false
+}
+
+variable "postgres_port" {
+  type        = number
+  description = "posgres port"
+  nullable    = false
+}
+
+variable "postgres_username" {
+  type        = string
+  description = "posgres username"
+  nullable    = false
+}
+
+variable "postgres_password" {
+  type        = string
+  description = "posgres password"
+  nullable    = false
+}
+
+variable "postgres_database" {
+  type        = string
+  description = "posgres database"
+  nullable    = false
+}
+
+variable "asaas_api_url" {
+  type        = string
+  description = "asaas api url"
+  nullable    = false
+}
+
+variable "asaas_api_token" {
+  type        = string
+  description = "asaas api token"
+  nullable    = false
+}
+
+variable "asaas_api_wallet_id" {
+  type        = string
+  description = "asaas api wallet id"
+  nullable    = false
+}
