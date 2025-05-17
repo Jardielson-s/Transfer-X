@@ -76,7 +76,10 @@ export class UserApplicationFactory {
     }
   }
 
-  async upsertUsers(data: Partial<UserEntity>[]): Promise<void> {
+  async upsertUsers(data: Partial<UserEntity>[]): Promise<{
+    errors: object;
+    upsert: object;
+  }> {
     try {
       try {
         const errors: Array<{ message: string; entity: Partial<UserEntity> }> =
@@ -122,6 +125,7 @@ export class UserApplicationFactory {
         if (upsert.length) {
           await this.upsertUserUseCase.execute(upsert);
         }
+        return { errors, upsert };
       } catch (error) {
         throw new BadRequestException(error.message);
       }

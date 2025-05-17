@@ -46,24 +46,24 @@ resource "aws_instance" "ubuntu_instance" {
               sudo echo "ASAAS_API_WALLET_ID=${var.asaas_api_wallet_id}" >> .env
               sudo npm install --force
 
-              # Configurar o Nginx como Proxy Reverso
-              sudo rm /etc/nginx/sites-enabled/default
-              sudo bash -c 'echo "server {
-                listen 80;
-                server_name _;
+              # # Configurar o Nginx como Proxy Reverso
+              # sudo rm /etc/nginx/sites-enabled/default
+              # sudo bash -c 'echo "server {
+              #   listen 80;
+              #   server_name _;
 
-                location / {
-                  proxy_pass http://localhost:3000;
-                  proxy_http_version 1.1;
-                  proxy_set_header Upgrade \$http_upgrade;
-                  proxy_set_header Connection 'upgrade';
-                  proxy_set_header Host \$host;
-                  proxy_cache_bypass \$http_upgrade;
-                }
-              }" > /etc/nginx/sites-available/default'
+              #   location / {
+              #     proxy_pass http://localhost:3000;
+              #     proxy_http_version 1.1;
+              #     proxy_set_header Upgrade \$http_upgrade;
+              #     proxy_set_header Connection 'upgrade';
+              #     proxy_set_header Host \$host;
+              #     proxy_cache_bypass \$http_upgrade;
+              #   }
+              # }" > /etc/nginx/sites-available/default'
               
-              sudo systemctl restart nginx
-              sudo systemctl enable nginx
+              # sudo systemctl restart nginx
+              # sudo systemctl enable nginx
               EOF
 
 
@@ -103,12 +103,12 @@ resource "aws_security_group" "allow_access_types" {
     # ipv6_cidr_blocks = ["::/0"]
   }
 
-  # ingress {
-  #   from_port   = 3000
-  #   to_port     = 3000
-  #   protocol    = "tcp"
-  #   cidr_blocks = ["0.0.0.0/0"]
-  # }
+  ingress {
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   egress {
     from_port   = 0
