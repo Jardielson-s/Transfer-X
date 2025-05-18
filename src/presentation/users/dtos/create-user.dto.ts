@@ -4,7 +4,6 @@ import {
   IsOptional,
   IsNotEmpty,
   Length,
-  Matches,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
@@ -54,9 +53,9 @@ export class CreateUserDto {
     example: '12345-678',
   })
   @IsString()
-  @Matches(/^\d{5}-\d{3}$/, {
-    message: 'Postal code must be in the format XXXXX-XXX',
-  })
+  // @Matches(/^\d{5}-\d{3}$/, {
+  //   message: 'Postal code must be in the format XXXXX-XXX',
+  // })
   postalCode: string;
 
   @ApiProperty({
