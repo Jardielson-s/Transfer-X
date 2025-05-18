@@ -97,7 +97,7 @@ export class UserApplicationFactory {
               message: 'Email already exists',
               entity: input,
             });
-            return;
+            return { upsert: [], errors: errors };
           }
           const einAlreadyExists = await this.userRepository.findByEin(
             input.ein,
@@ -110,7 +110,7 @@ export class UserApplicationFactory {
               message: 'Ein already exists',
               entity: input,
             });
-            return;
+            return { upsert: [], errors: errors };
           }
           const userExternalId = await this.asaasService.createCustomer({
             ...input,
