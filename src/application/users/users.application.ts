@@ -85,42 +85,40 @@ export class UserApplicationFactory {
         const errors: Array<{ message: string; entity: Partial<UserEntity> }> =
           [];
         const upsert: Array<Partial<UserEntity>> = [];
-        await Promise.all(
-          data.map(async (input) => {
-            const emailAlreadyExists = await this.userRepository.findByEmail(
-              input.email,
-              {
-                ...(input?.id ? { id: Not(input?.id) } : {}),
-              },
-            );
-            if (emailAlreadyExists) {
-              errors.push({
-                message: 'Email already exists',
-                entity: input,
-              });
-              return;
-            }
-            const einAlreadyExists = await this.userRepository.findByEin(
-              input.ein,
-              {
-                ...(input?.id ? { id: Not(input?.id) } : {}),
-              },
-            );
-            if (einAlreadyExists) {
-              errors.push({
-                message: 'Ein already exists',
-                entity: input,
-              });
-              return;
-            }
-            const userExternalId = await this.asaasService.createCustomer({
-              ...input,
-              cpfCnpj: input.ein,
+        for (const input of data) {
+          const emailAlreadyExists = await this.userRepository.findByEmail(
+            input.email,
+            {
+              ...(input?.id ? { id: Not(input?.id) } : {}),
+            },
+          );
+          if (emailAlreadyExists) {
+            errors.push({
+              message: 'Email already exists',
+              entity: input,
             });
-            input.externalUserId = userExternalId;
-            upsert.push(input);
-          }),
-        );
+            return;
+          }
+          const einAlreadyExists = await this.userRepository.findByEin(
+            input.ein,
+            {
+              ...(input?.id ? { id: Not(input?.id) } : {}),
+            },
+          );
+          if (einAlreadyExists) {
+            errors.push({
+              message: 'Ein already exists',
+              entity: input,
+            });
+            return;
+          }
+          const userExternalId = await this.asaasService.createCustomer({
+            ...input,
+            cpfCnpj: input.ein,
+          });
+          input.externalUserId = userExternalId;
+          upsert.push(input);
+        }
 
         if (upsert.length) {
           await this.upsertUserUseCase.execute(upsert);

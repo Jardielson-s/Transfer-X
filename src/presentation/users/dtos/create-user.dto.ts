@@ -106,5 +106,5 @@ export class CreateUserDto {
   })
   @IsString()
   @IsOptional()
-  externalUserId?: string;
+  integrationId: string;
 }

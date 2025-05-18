@@ -47,8 +47,11 @@ export class UserEntity implements IEntity {
   @Column({ type: 'varchar' })
   country: string;
 
-  @Column({ type: 'varchar' })
+  @Column({ type: 'varchar', name: 'external_user_id' })
   externalUserId: string;
+
+  @Column({ type: 'varchar', name: 'integration_id' })
+  integrationId: string;
 
   @CreateDateColumn()
   createdAt: Date;
