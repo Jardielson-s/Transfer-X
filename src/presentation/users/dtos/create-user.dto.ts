@@ -99,4 +99,12 @@ export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
   country: string;
+
+  @ApiProperty({
+    description: 'User another application',
+    example: 'objectId',
+  })
+  @IsString()
+  @IsOptional()
+  externalUserId?: string;
 }

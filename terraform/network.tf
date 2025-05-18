@@ -1,5 +1,5 @@
 resource "aws_key_pair" "key_pair_aws_intance" {
-  key_name   = "aws_local_instance"
+  key_name   = "aws_local_instance_transfer_x"
   public_key = var.public_key_to_pair_key
 }
 
