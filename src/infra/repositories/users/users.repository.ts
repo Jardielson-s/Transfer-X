@@ -30,7 +30,7 @@ export class UserRepository
     return await this.userRepository.upsert(input, ['id']);
   }
 
-  async findByEmail(email: string, query: object = null): Promise<UserEntity> {
+  async findByEmail(email: string, query: object = {}): Promise<UserEntity> {
     return await this.userRepository.findOne({
       where: {
         email,
