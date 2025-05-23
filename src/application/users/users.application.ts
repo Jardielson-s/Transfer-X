@@ -30,7 +30,10 @@ export class UserApplicationFactory {
       if (emailAlreadyExists) {
         throw new BadRequestException('Email already exists');
       }
-      const einAlreadyExists = await this.userRepository.findByEin(input.ein);
+      const einAlreadyExists = await this.userRepository.findByEin(
+        input.ein,
+        {},
+      );
       if (einAlreadyExists) {
         throw new BadRequestException('Ein already exists');
       }

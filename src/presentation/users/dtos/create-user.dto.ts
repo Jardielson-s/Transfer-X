@@ -10,7 +10,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class CreateUserDto {
   @ApiProperty({
     description: 'User ein',
-    example: '50730577082',
+    example: '785.976.970-08',
   })
   @IsNotEmpty()
   @IsString()
@@ -99,10 +99,6 @@ export class CreateUserDto {
   @IsNotEmpty()
   country: string;
 
-  @ApiProperty({
-    description: 'User another application',
-    example: 'objectId',
-  })
   @IsString()
   @IsOptional()
   integrationId: string;
