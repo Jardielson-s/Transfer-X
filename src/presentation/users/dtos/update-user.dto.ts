@@ -118,4 +118,8 @@ export class UpdateUserDto {
   @IsString()
   @IsNotEmpty()
   country: string;
+
+  @IsString()
+  @IsOptional()
+  integrationId: string;
 }
