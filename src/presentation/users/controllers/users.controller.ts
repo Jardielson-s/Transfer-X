@@ -12,7 +12,6 @@ import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Response as Res } from 'express';
 import { UserApplicationFactory } from 'application/users/users.application';
 import { CreateUserDto } from '../dtos/create-user.dto';
-import { UpdateUserDto } from '../dtos/update-user.dto';
 import { UpsertUsers } from '../dtos/upsert-users.dto';
 import { UserEntity } from 'domain/users/entities/user.entity';
 import { QueryUserDto } from '../dtos/query-user.dto';
@@ -43,11 +42,8 @@ export class UsersController {
     status: 201,
     description: 'returns only request status',
   })
-  async update(
-    @Response() res: Res,
-    @Body() input: UpdateUserDto,
-  ): Promise<Res> {
-    const data = await this.userApplicationFactory.updateUser(input);
+  async update(@Response() res: Res, @Body() input: UpsertUsers): Promise<Res> {
+    const data = await this.userApplicationFactory.updateUser(input.data[0]);
     return res.status(201).json(data);
   }
 

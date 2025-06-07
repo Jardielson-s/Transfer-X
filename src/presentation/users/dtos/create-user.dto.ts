@@ -9,6 +9,14 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
   @ApiProperty({
+    description: 'User id',
+    example: '6a761ad1-d5de-4298-9ed7-b38e3a775ba6',
+  })
+  @IsOptional()
+  @IsString()
+  id: string;
+
+  @ApiProperty({
     description: 'User ein',
     example: '785.976.970-08',
   })
