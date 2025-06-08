@@ -28,6 +28,7 @@ export class AsaasService {
       }
       return JSON.parse(customer?.data)?.id;
     } catch (err) {
+      console.log(err);
       throw new BadRequestException(err.message);
     }
   }
