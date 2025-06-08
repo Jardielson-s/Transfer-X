@@ -7,6 +7,7 @@ import { AsaasService } from 'infra/gateway-payments/asaas.service';
 import { UserRepository } from 'infra/repositories/users/users.repository';
 import * as bson from 'bson';
 import { Not } from 'typeorm';
+import { randomUUID } from 'crypto';
 
 @Injectable()
 export class UserApplicationFactory {
@@ -120,11 +121,11 @@ export class UserApplicationFactory {
             });
             return { upsert: [], errors: errors };
           }
-          const userExternalId = await this.asaasService.createCustomer({
-            ...input,
-            cpfCnpj: input.ein,
-          });
-          input.externalUserId = userExternalId;
+          // const userExternalId = await this.asaasService.createCustomer({
+          //   ...input,
+          //   cpfCnpj: input.ein,
+          // });
+          input.externalUserId = randomUUID();
           input.externalApplication = true;
           upsert.push(input);
         }
