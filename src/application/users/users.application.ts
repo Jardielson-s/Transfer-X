@@ -124,6 +124,7 @@ export class UserApplicationFactory {
             cpfCnpj: input.ein,
           });
           input.externalUserId = userExternalId;
+          input.externalApplication = true;
           upsert.push(input);
         }
 

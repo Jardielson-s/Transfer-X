@@ -62,6 +62,9 @@ export class UserEntity implements IEntity {
   @OneToMany(() => WalletEntity, (wallet) => wallet.user)
   wallets: WalletEntity[];
 
+  @Column({ type: 'varchar', name: 'external_application', default: false })
+  externalApplication: boolean;
+
   constructor(input: Partial<UserEntity>) {
     Object.assign(this, input);
   }
