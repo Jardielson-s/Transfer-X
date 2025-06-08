@@ -7,7 +7,6 @@ import { AsaasService } from 'infra/gateway-payments/asaas.service';
 import { UserRepository } from 'infra/repositories/users/users.repository';
 import * as bson from 'bson';
 import { Not } from 'typeorm';
-import { randomUUID } from 'crypto';
 
 @Injectable()
 export class UserApplicationFactory {
@@ -125,7 +124,7 @@ export class UserApplicationFactory {
           //   ...input,
           //   cpfCnpj: input.ein,
           // });
-          input.externalUserId = randomUUID();
+          input.externalUserId = new bson.ObjectId().toString();
           input.externalApplication = true;
           upsert.push(input);
         }
