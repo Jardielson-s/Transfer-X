@@ -23,6 +23,7 @@ export class AsaasService {
         '/customers',
         JSON.stringify(input),
       );
+      console.log(customer);
       if (customer.status === 400) {
         JSON.parse(customer.data)?.errors[0]?.description;
       }
