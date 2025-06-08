@@ -46,7 +46,7 @@ export class UserApplicationFactory {
       input.externalUserId = userExternalId;
       await this.createUserUseCase.execute({
         ...input,
-        integrationId: new bson.ObjectId(),
+        integrationId: new bson.ObjectId().toString(),
       });
     } catch (error) {
       throw new BadRequestException(error.message);
