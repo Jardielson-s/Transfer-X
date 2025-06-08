@@ -5,7 +5,7 @@ import { UpdateUserUseCase } from 'domain/users/use-cases/update-user/update-use
 import { UpsertUserUseCase } from 'domain/users/use-cases/upsert-users/upsert-users.use-case';
 import { AsaasService } from 'infra/gateway-payments/asaas.service';
 import { UserRepository } from 'infra/repositories/users/users.repository';
-import bson from 'bson';
+import * as bson from 'bson';
 import { Not } from 'typeorm';
 
 @Injectable()

@@ -1,4 +1,4 @@
-import bson from 'bson';
+import * as bson from 'bson';
 import { IEntity } from 'domain/interfaces/entity';
 import { WalletEntity } from 'domain/wallets/entities/wallet.entity';
 import {

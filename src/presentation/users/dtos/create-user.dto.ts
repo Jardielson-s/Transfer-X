@@ -6,7 +6,8 @@ import {
   Length,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import bson from 'bson';
+import * as bson from 'bson';
+
 export class CreateUserDto {
   @ApiProperty({
     description: 'User id',
