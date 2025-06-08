@@ -1,4 +1,3 @@
-import * as bson from 'bson';
 import { IEntity } from 'domain/interfaces/entity';
 import { WalletEntity } from 'domain/wallets/entities/wallet.entity';
 import {
@@ -52,7 +51,7 @@ export class UserEntity implements IEntity {
   externalUserId: string;
 
   @Column({ type: 'varchar', name: 'integration_id' })
-  integrationId: bson.ObjectId;
+  integrationId: string;
 
   @CreateDateColumn()
   createdAt: Date;

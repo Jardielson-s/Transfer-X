@@ -6,7 +6,6 @@ import {
   Length,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import * as bson from 'bson';
 
 export class CreateUserDto {
   @ApiProperty({
@@ -110,5 +109,5 @@ export class CreateUserDto {
 
   @IsString()
   @IsOptional()
-  integrationId: bson.ObjectId;
+  integrationId: string;
 }
