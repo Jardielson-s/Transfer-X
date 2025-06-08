@@ -73,6 +73,7 @@ export class CreateUsersTable1745112921879 implements MigrationInterface {
             name: 'external_user_id',
             type: 'varchar',
             length: '20',
+            isNullable: true,
           },
           {
             name: 'created_at',
