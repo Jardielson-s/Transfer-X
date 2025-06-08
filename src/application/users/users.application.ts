@@ -39,11 +39,11 @@ export class UserApplicationFactory {
         throw new BadRequestException('Ein already exists');
       }
 
-      const userExternalId = await this.asaasService.createCustomer({
-        ...input,
-        cpfCnpj: input.ein,
-      });
-      input.externalUserId = userExternalId;
+      // const userExternalId = await this.asaasService.createCustomer({
+      //   ...input,
+      //   cpfCnpj: input.ein,
+      // });
+      // input.externalUserId = userExternalId;
       await this.createUserUseCase.execute({
         ...input,
         integrationId: new bson.ObjectId().toString(),
