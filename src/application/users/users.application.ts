@@ -47,6 +47,7 @@ export class UserApplicationFactory {
       await this.createUserUseCase.execute({
         ...input,
         integrationId: new bson.ObjectId().toString(),
+        externalApplication: false,
       });
     } catch (error) {
       throw new BadRequestException(error.message);
