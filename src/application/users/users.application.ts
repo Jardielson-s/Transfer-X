@@ -124,7 +124,7 @@ export class UserApplicationFactory {
           //   ...input,
           //   cpfCnpj: input.ein,
           // });
-          input.externalUserId = new bson.ObjectId().toString();
+          // input.externalUserId = userExternalId;
           input.externalApplication = true;
           upsert.push(input);
         }
