@@ -23,3 +23,8 @@ terraform init -backend-config="backend.conf" --var-file="terraform.tfvars"
 terraform plan --var-file="terraform.tfvars"
 terraform apply --var-file="terraform.tfvars" -auto-approve
 ```
+
+## Use Gemini to review
+```
+\gemini review
+```
